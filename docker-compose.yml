@@ -7,6 +7,7 @@ services:
         networks:
             - functions
         environment:
+            write_request_uri: "true"
             functions_provider_url: "http://faas-mq:8080/"
             read_timeout:  "300s"        # Maximum time to read HTTP request
             write_timeout: "300s"        # Maximum time to write HTTP response
@@ -42,6 +43,8 @@ services:
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
         image:  stack360/faas-mq
+        ports:
+            - 8888:8080
         networks:
             - functions
         environment:
@@ -50,7 +53,8 @@ services:
             DOCKER_API_VERSION: "1.30"
             basic_auth: "false"
             secret_mount_path: "/run/secrets/"
-            RABBIT_URL: "amqp://guest:guest@13.52.107.109/"
+            RABBIT_URL: "amqp://guest:guest@13.52.107.109:5672/"
+            STACK_NAME: "android"
         deploy:
             placement:
                 constraints:
