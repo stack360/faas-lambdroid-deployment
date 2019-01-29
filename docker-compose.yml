@@ -8,7 +8,7 @@ services:
             - functions
         environment:
             write_request_uri: "true"
-            functions_provider_url: "http://faas-mq:8080/"
+            functions_provider_url: "http://faas-lambdroid:8080/"
             read_timeout:  "300s"        # Maximum time to read HTTP request
             write_timeout: "300s"        # Maximum time to write HTTP response
             upstream_timeout: "300s"     # Maximum duration of upstream function call - should be more than read_timeout and write_timeout
@@ -38,11 +38,11 @@ services:
             - basic-auth-user
             - basic-auth-password
 
-    # FaaS MQ provider
-    faas-mq:
+    # FaaS LambDroid provider
+    faas-lambdroid:
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
-        image:  stack360/faas-mq
+        image:  stack360/faas-lambdroid
         ports:
             - 8888:8080
         networks:
@@ -53,8 +53,8 @@ services:
             DOCKER_API_VERSION: "1.30"
             basic_auth: "false"
             secret_mount_path: "/run/secrets/"
-            RABBIT_URL: "amqp://guest:guest@13.52.107.109:5672/"
-            STACK_NAME: "android"
+            LAMBDROID_TOWER_URL: "http://rabbit:9999"
+            STACK_NAME: "lambdroid"
         deploy:
             placement:
                 constraints:

@@ -1,4 +1,4 @@
-faas-mq-deployment
+faas-lambdroid-deployment
 ==============
 
 ### Prerequisites:
@@ -16,4 +16,4 @@ Run following commands to generate secrets
     echo "[Credentials]\n username: admin \n password: $secret\n echo -n "$secret" | faas-cli login --username=admin --password-stdin"
 ```
 
-Then run `docker stack deploy --compose-file docker-compose.yml faas-mq`
+Then run `docker stack deploy --compose-file docker-compose.yml faas-lambdroid`
